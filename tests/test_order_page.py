@@ -5,6 +5,7 @@ from pages.main_page import MainPage
 from pages.order_page import OrderPage
 
 from data.data import Orders
+from data.urls import Url
 
 
 class TestOrderPage:
@@ -28,4 +29,4 @@ class TestOrderPage:
         main_page.order_top_button_click()
         main_page.scooter_logo_click()
         url = main_page.get_current_url()
-        assert url == main_page.url
+        assert url == Url.MAIN_PAGE_URL

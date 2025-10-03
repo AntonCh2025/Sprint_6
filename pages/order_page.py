@@ -6,16 +6,17 @@ from selenium.webdriver.support.wait import WebDriverWait
 import allure
 
 import locators.order_page_locators as OP
+from data.urls import Url
 
 
 class OrderPage:
-    url = 'https://qa-scooter.praktikum-services.ru/order'
+    # url = 'https://qa-scooter.praktikum-services.ru/order'
 
     def __init__(self, driver):
         self.driver = driver
 
     def open(self):
-        self.driver.get(self.url)
+        self.driver.get(Url.ORDER_PAGE_URL)
 
     def input_name(self, name):
         WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.name))

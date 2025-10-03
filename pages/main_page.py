@@ -4,17 +4,18 @@ from selenium.webdriver.support.wait import WebDriverWait
 import allure
 
 import locators.main_page_locators as MP
+from data.urls import Url
 
 
 class MainPage:
-    url = 'https://qa-scooter.praktikum-services.ru/'
+    # url = 'https://qa-scooter.praktikum-services.ru/'
 
     def __init__(self, driver):
         self.driver = driver
 
     @allure.step("Открыть стартовую страницу")
     def open(self):
-        self.driver.get(self.url)
+        self.driver.get(Url.MAIN_PAGE_URL)
 
     @allure.step("Нажать кнопку создания заказа")
     def order_button_click(self, button):
@@ -54,7 +55,7 @@ class MainPage:
     
     @allure.step("Проверить, что открыта стартовая страница")
     def is_start_page_open(self):
-        return self.driver.current_url == self.url
+        return self.driver.current_url == Url.MAIN_PAGE_URL
     
 
     @allure.step("Нажать на логотип Самоката")
