@@ -4,13 +4,13 @@ import allure
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
 
-from data.data import orders
+from data.data import Orders
 
 
 class TestOrderPage:
 
     @allure.title("Проверка заказа самоката")
-    @pytest.mark.parametrize('order', orders)
+    @pytest.mark.parametrize('order', Orders.orders)
     def test_order_succesfull_order(self, order, browser):
         main_page = MainPage(browser)
         main_page.open()

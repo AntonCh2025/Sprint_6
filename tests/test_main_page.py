@@ -2,7 +2,7 @@ from selenium import webdriver
 import pytest
 import allure
 from pages.main_page import MainPage
-from data.data import questions
+from data.data import Questions
 
 
 class TestMainPage:
@@ -13,7 +13,7 @@ class TestMainPage:
         cls.driver = webdriver.Firefox()
 
     @allure.title("Проверка ответов на вопросы")
-    @pytest.mark.parametrize('question', questions)
+    @pytest.mark.parametrize('question', Questions.questions)
     def test_question_answer_correct(self, question):
         main_page = MainPage(self.driver)
         main_page.open()
