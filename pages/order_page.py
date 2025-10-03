@@ -1,75 +1,50 @@
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.support.wait import WebDriverWait
-
-import allure
 
 import locators.order_page_locators as OP
 from data.urls import Url
+from pages.base_page import BasePage
+from helpers.locator_maker import LocatorMaker
+
+import allure
 
 
-class OrderPage:
-    # url = 'https://qa-scooter.praktikum-services.ru/order'
-
-    def __init__(self, driver):
-        self.driver = driver
+class OrderPage(BasePage):
 
     def open(self):
-        self.driver.get(Url.ORDER_PAGE_URL)
+        self.open_url(Url.ORDER_PAGE_URL)
 
     def input_name(self, name):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.name))
-        self.driver.find_element(*OP.name).send_keys(name)
+        self.fill_input(OP.name, name)
 
     def input_surname(self, surname):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.surname))
-        self.driver.find_element(*OP.surname).send_keys(surname)
+        self.fill_input(OP.surname, surname)
 
     def input_address(self, address):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.address))
-        self.driver.find_element(*OP.address).send_keys(address)
-
-    def station_click(self, station):
-        xpath = f'//div[@class="select-search__select"]/descendant::*[text()="{station}"]'
-        locator = [By.XPATH, xpath]
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(locator))
-        self.driver.find_element(*locator).click()
+        self.fill_input(OP.address, address)
 
     def select_metro_station(self, station):
-        self.driver.find_element(*OP.metro_station).click()
-        self.station_click(station)
+        self.element_click(OP.metro_station)
+        self.element_click(LocatorMaker.metro_station(station))
 
     def input_phone_number(self, number):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.telephone))
-        self.driver.find_element(*OP.telephone).send_keys(number)
+        self.fill_input(OP.telephone, number)
 
-    def next_button_click(self):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.next_button))
-        self.driver.find_element(*OP.next_button).click()
+    def next_element_click(self):
+        self.element_click(OP.next_button)
 
     def input_delivery_date(self, date):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.deliver_date))
-        self.driver.find_element(*OP.deliver_date).send_keys(date)
-        self.driver.find_element(*OP.deliver_date).send_keys(Keys.RETURN)
-
-    def time_option_click(self, option):
-        locator = [By.XPATH, f'//div[@class="Dropdown-menu"]/descendant::*[text()="{option}"]']
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(locator))
-        self.driver.find_element(*locator).click()
+        self.fill_input(OP.deliver_date, date)
+        self.fill_input(OP.deliver_date, Keys.RETURN)
 
     def select_rent_time(self, rent_time):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.rent_time))
-        self.driver.find_element(*OP.rent_time).click()
-        self.time_option_click(rent_time)
+        self.element_click(OP.rent_time)
+        self.element_click(LocatorMaker.time_option(rent_time))
 
     def select_gray_color(self):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.color_gray))
-        self.driver.find_element(*OP.color_gray).click()
+        self.element_click(OP.color_gray)
 
     def select_black_color(self):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.color_black))
-        self.driver.find_element(*OP.color_black).click()
+        self.element_click(OP.color_black)
 
     def select_scooter_color(self, color):
         if color == 'черный':
@@ -78,20 +53,17 @@ class OrderPage:
             self.select_gray_color()
 
     def input_comment(self, comment):
-        self.driver.find_element(*OP.comment).send_keys(comment)
+        self.fill_input(OP.comment, comment)
 
-    def order_button_click(self):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.rent_button))
-        self.driver.find_element(*OP.rent_button).click()
+    def order_element_click(self):
+        self.element_click(OP.rent_button)
 
     def confirm_order(self):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.yes_button))
-        self.driver.find_element(*OP.yes_button).click()
+        self.element_click(OP.yes_button)
 
     @allure.step("Проверить, что заказ успешно оформлен")
     def is_order_success(self):
-        WebDriverWait(self.driver, 5).until(EC.visibility_of_element_located(OP.form_success))
-        text = self.driver.find_element(*OP.form_success).text
+        text = self.get_element_text(OP.form_success)
         return "Заказ оформлен" in text
 
     @allure.step("Оформить заказ")
@@ -101,17 +73,13 @@ class OrderPage:
         self.input_address(order_data['address'])
         self.select_metro_station(order_data['metro'])
         self.input_phone_number(order_data['phone'])
-        self.next_button_click()
+        self.next_element_click()
         self.input_delivery_date(order_data['delivery_date'])
         self.select_rent_time(order_data['rent_time'])
         self.select_scooter_color(order_data['color'])
         self.input_comment(order_data['comment'])
-        self.order_button_click()
+        self.order_element_click()
         self.confirm_order()
 
     def show_order_status_click(self):
-        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.show_status_button))
-        self.driver.find_element(*OP.show_status_button).click()
-
-    
-
+        self.element_click(OP.show_status_button)

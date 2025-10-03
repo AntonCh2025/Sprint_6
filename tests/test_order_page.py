@@ -1,12 +1,10 @@
-from selenium import webdriver
-import pytest
-import allure
 from pages.main_page import MainPage
 from pages.order_page import OrderPage
-
 from data.data import Orders
 from data.urls import Url
 
+import pytest
+import allure
 
 class TestOrderPage:
 
@@ -29,4 +27,4 @@ class TestOrderPage:
         assert main_page.get_current_url() == Url.MAIN_PAGE_URL
         main_page.yandex_logo_click()
         main_page.switch_to_new_tab()
-        assert main_page.is_dzen_page()
+        assert main_page.current_url_matches_dzen()

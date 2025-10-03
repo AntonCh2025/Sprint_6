@@ -1,9 +1,8 @@
-from selenium import webdriver
-import pytest
-import allure
 from pages.main_page import MainPage
 from data.data import Questions
 
+import pytest
+import allure
 
 class TestMainPage:
 

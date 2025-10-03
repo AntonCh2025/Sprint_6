@@ -1,5 +1,5 @@
-from selenium.webdriver.common.by import By
 import locators.main_page_locators as MP
+import locators.base_page_locators as BP
 
 
 class Questions:
@@ -71,7 +71,7 @@ class Orders:
         'rent_time': 'трое суток',
         'color': 'черный',
         'comment': 'Пешеходы достали мешаться',
-        'button': MP.order_top_button
+        'button': BP.order_top_button
     }
 
     second_order = {
