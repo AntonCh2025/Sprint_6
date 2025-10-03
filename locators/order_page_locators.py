@@ -15,10 +15,10 @@ color_black = [By.XPATH, '//*[@id="black"]']
 color_gray = [By.XPATH, '//*[@id="grey"]']
 comment = [By.XPATH, '//*[contains(@placeholder, "Комментарий")]']
 back_button = [By.XPATH, '//button[text()="Назад"]']
-rent_button = [By.XPATH, '//div[@class="Order_Buttons__1xGrp"]/button[text()="Заказать"]']
+rent_button = [By.XPATH, '//div[contains(@class,"Order_Buttons")]/button[text()="Заказать"]']
 
 #Подтверждение
-yes_button = [By.XPATH, '//div[@class="Order_ModalHeader__3FDaJ"]//following::button[text()="Да"]']
+yes_button = [By.XPATH, '//div[contains(@class,"Order_Buttons")]/button[text()="Да"]']
 no_button = [By.XPATH, '//button[text()="Нет"]']
 
 #Заказ оформлен

@@ -1,7 +1,7 @@
 from selenium.webdriver.common.by import By
 
-order_bottom_button = [By.XPATH, '//*[@class="Home_RoadMap__2tal_"]/descendant::button']
-accept_cookie = [By.XPATH, '//button[@class="App_CookieButton__3cvqF"]']
+order_bottom_button = [By.XPATH, '//div[contains(@class,"Home_RoadMap")]/descendant::button']
+accept_cookie = [By.XPATH, '//button[contains(@class,"CookieButton")]']
 
 question1_locator = [By.XPATH, '//div[contains(text(),"Сколько это стоит")]']
 answer1_locator = [By.XPATH, '//p[contains(text(),"400 рублей")]']
