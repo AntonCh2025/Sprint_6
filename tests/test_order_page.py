@@ -21,12 +21,12 @@ class TestOrderPage:
         order_page = OrderPage(browser)
         order_page.fill_order_data(order)
         assert order_page.is_order_success()
+        order_page.show_order_status_click()
 
-    @allure.title("Проверка перехода на главную страницу при клике на логотип самоката")    
-    def test_scooter_logo_click_start_page_opened(self, browser):
         main_page = MainPage(browser)
-        main_page.open()
-        main_page.order_top_button_click()
         main_page.scooter_logo_click()
-        url = main_page.get_current_url()
-        assert url == Url.MAIN_PAGE_URL
+
+        assert main_page.get_current_url() == Url.MAIN_PAGE_URL
+        main_page.yandex_logo_click()
+        main_page.switch_to_new_tab()
+        assert main_page.is_dzen_page()

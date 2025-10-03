@@ -108,3 +108,10 @@ class OrderPage:
         self.input_comment(order_data['comment'])
         self.order_button_click()
         self.confirm_order()
+
+    def show_order_status_click(self):
+        WebDriverWait(self.driver, 5).until(EC.element_to_be_clickable(OP.show_status_button))
+        self.driver.find_element(*OP.show_status_button).click()
+
+    
+
