@@ -1,6 +1,7 @@
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
 from data.urls import Url
+import locators.base_page_locators as BP
 import allure
 
 class BasePage:
@@ -43,3 +44,16 @@ class BasePage:
     def current_url_matches_dzen(self):
         WebDriverWait(self.driver, 5).until(EC.url_to_be(Url.DZEN_PAGE_URL))
         return self.driver.current_url == Url.DZEN_PAGE_URL
+
+    @allure.step("Нажать на логотип Яндекс")
+    def yandex_logo_click(self):
+        self.element_click(BP.yandex_logo)
+
+    @allure.step("Нажать на логотипа Самоката")
+    def scooter_logo_click(self):
+        self.element_click(BP.scooter_logo)
+
+    @allure.step("Проверить, что открылась главная страница Самоката")
+    def current_url_matches_main_page(self):
+        WebDriverWait(self.driver, 5).until(EC.url_to_be(Url.MAIN_PAGE_URL))
+        return self.driver.current_url == Url.MAIN_PAGE_URL

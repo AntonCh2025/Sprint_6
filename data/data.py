@@ -70,8 +70,8 @@ class Orders:
         'delivery_date': '31.10.2025',
         'rent_time': 'трое суток',
         'color': 'черный',
-        'comment': 'Пешеходы достали мешаться',
-        'button': BP.order_top_button
+        'comment': 'Пешеходы достали мешаться'
+        # 'button': BP.order_top_button
     }
 
     second_order = {
@@ -83,8 +83,11 @@ class Orders:
         'delivery_date': '30.10.2025',
         'rent_time': 'двое суток',
         'color': 'серый',
-        'comment': 'Миска риса Мяо счастливый',
-        'button': MP.order_bottom_button
+        'comment': 'Миска риса Мяо счастливый'
+        # 'button': MP.order_bottom_button
     }
 
-    orders = [first_order, second_order]
+    first_order_with_button = [BP.order_top_button, "Кнопка сверху", first_order]
+    second_order_with_button = [MP.order_bottom_button, "Кнопка снизу", second_order]
+
+    orders = [first_order_with_button, second_order_with_button]

@@ -10,6 +10,7 @@ import allure
 
 class OrderPage(BasePage):
 
+    @allure.step("Открыть страницу заказа самоката")
     def open(self):
         self.open_url(Url.ORDER_PAGE_URL)
 
