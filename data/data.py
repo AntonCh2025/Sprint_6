@@ -71,7 +71,6 @@ class Orders:
         'rent_time': 'трое суток',
         'color': 'черный',
         'comment': 'Пешеходы достали мешаться'
-        # 'button': BP.order_top_button
     }
 
     second_order = {
@@ -84,7 +83,6 @@ class Orders:
         'rent_time': 'двое суток',
         'color': 'серый',
         'comment': 'Миска риса Мяо счастливый'
-        # 'button': MP.order_bottom_button
     }
 
     first_order_with_button = [BP.order_top_button, "Кнопка сверху", first_order]
